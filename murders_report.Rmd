@@ -1,0 +1,54 @@
+---
+title: "Gun Murder Analysis Report"
+author: "Zen Foo"
+date: "2/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = TRUE)
+load('rda/murders.rda')
+```
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r Murders summary}
+summary(murders)
+```
+```{r, echo=F}
+n <- nrow(murders)
+
+```
+There are `r n` records in murders dataset
+
+
+```{r Head of data}
+head(murders)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+murders %>% mutate(abb = reorder(abb, rate)) %>%
+  ggplot(aes(abb, rate)) +
+  geom_bar(width=0.5, stat='identity', color='grey') +
+  coord_flip()
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Histogram of Murder Rate
+Check out the distribution of murder rate
+```{r histogram, echo=FALSE}
+hist(murders$rate)
+
+```
+
